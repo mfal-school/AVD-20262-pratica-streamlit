@@ -1,5 +1,44 @@
 # AVD-20262-pratica-streamlit
 
+## Dados deste projeto: Brasileirão
+
+O aplicativo agora usa a base da [minha EDA no Colab](https://colab.research.google.com/drive/1uQoUUXiGL20K3pblRo6gENLramU72f4y), em vez do Heart Disease da aula.
+
+- **Fonte:** [Brazilian Football Dataset — Kaggle](https://www.kaggle.com/datasets/lucasyukioimafuko/brasileirao-serie-a-2006-2022), versão **19**, identificada na execução salva do Colab.
+- **Unidade de análise:** um clube em uma temporada; 450 campanhas entre 2003 e 2024.
+- **Variáveis quantitativas:** `points`, `played`, `won`, `draw`, `loss`, `goals`, `goals_taken` e `goals_diff`.
+- **Tratamento:** mantém todos os registros e outliers, cria `saldo_resultado` (`goals_diff > 0`) e `goals_log` (`log1p(goals)`), como no notebook. A transformação logarítmica fica fora das variáveis principais do dashboard.
+- **Dashboard:** correlação de Spearman, histograma por saldo de gols e filtros por temporada, clube e valores das variáveis.
+
+O CSV tratado está em `data/clean/dataset.csv`; o app funciona sem acessar o Colab ou o Kaggle. Para reproduzir a exportação, após instalar as dependências:
+
+```bash
+python scripts/prepare_data.py
+```
+
+O script usa `data/raw/brasileirao.csv` quando disponível; caso contrário, baixa a versão 19 do Kaggle.
+
+- `notebooks/eda.ipynb`: cópia integral do notebook da Aula 11 indicado no Colab, recuperada em 27/10/2026, incluindo análises, resultados e gráficos salvos. O arquivo original foi preservado sem edição; a versão disponível no Drive foi modificada em 19/10/2026.
+- `notebooks/arquivo-eda-original.ipynb`: notebook da professora, mantido para consulta.
+- `notebooks/eda-com-downloads.ipynb`: cópia adaptada para execução local ou no Colab, com a fonte fixada na versão 19, leitura de `data/raw/` e exportação final. Execute este notebook para preparar os dados do dashboard.
+
+Em `eda-com-downloads.ipynb`, execute a EDA e a seção final **Download dos Datasets**. Ela salva dois arquivos e, no Colab, também oferece os downloads:
+
+- `brasileirao.csv`: cópia original (`df_raw`), com 11 colunas; coloque em `data/raw/`.
+- `dataset.csv`: dados tratados (`df`), com `saldo_resultado` e `goals_log`; substitua o arquivo em `data/clean/`.
+
+As duas versões mantêm as 450 campanhas, conforme a decisão da EDA de preservar os outliers. O filtro de 38 jogos do gráfico final não é aplicado ao CSV exportado. Em execução local, os arquivos já são salvos nas pastas corretas. O link do Colab aponta para um notebook, não para um CSV; as alterações no Colab não são sincronizadas automaticamente.
+
+## Entrega da Aula 21 — parte 1
+
+- Rascunho do Dashboard 1: [entregas/rascunho-dashboard1.png](entregas/rascunho-dashboard1.png).
+- Prompt aplicado à revisão do esqueleto: [prompts/layout-skeleton-prompt.md](prompts/layout-skeleton-prompt.md).
+- Aplicativo: `app.py`, com sidebar, seletores de variáveis, sliders de intervalo, correlação e distribuição.
+- Captura do app em execução: [entregas/dashboard1-em-execucao.png](entregas/dashboard1-em-execucao.png). Em 27/10/2026, o slider de pontos e o seletor do histograma foram testados no navegador; os filtros combinados também passaram nos testes automatizados do Streamlit.
+- Declaração de uso de IA: [prompts/declaracao-uso-ia.md](prompts/declaracao-uso-ia.md), a ser preenchida manualmente pelo aluno ao terminar a atividade.
+
+No Windows desta execução, `streamlit skills --yes` concluiu usando automaticamente a instalação global, pois o sistema não permitiu criar os links simbólicos locais.
+
 Repositório utilizado para aula prática relacionada a Streamlit na disciplina Análise e Visualização de Dados da Cesar School no período de 2026.2.
 
 Repositório-modelo das Aulas 21, 22 e 23: construção de dois dashboards em Streamlit a partir da EDA desenvolvida em sala. O deploy dos dashbords ocorrerá via Streamlit Community Cloud e serão os seguintes:
@@ -49,7 +88,7 @@ streamlit run app.py
 - **Python fora de 3.11–3.15:** instale uma versão compatível em [python.org](https://www.python.org/downloads/) e crie o venv com ela, como no exemplo acima.
 - **Apareceu `ModuleNotFoundError` ou `streamlit: command not found`:** o venv provavelmente não está ativo. Ative de novo e confira o `(.venv)` no prompt.
 - **Erro de certificado no `pip install` (macOS, Python do python.org):** rode `Install Certificates.command`, na pasta Python 3.X em Aplicativos.
-- **`DatasetNotFoundError` ao baixar o dataset no notebook (macOS, Python do python.org):** é o mesmo problema de certificado SSL (o `pandas` não consegue ler o CSV da UCI). Rode `Install Certificates.command` e reinicie o kernel. O notebook `eda-com-downloads.ipynb` já define `SSL_CERT_FILE` com o `certifi` como contorno.
+- **Erro de certificado SSL ao baixar os dados do Kaggle (macOS, Python do python.org):** rode `Install Certificates.command`, na pasta Python 3.X em Aplicativos, e reinicie o kernel. Se `data/raw/brasileirao.csv` já existir, `eda-com-downloads.ipynb` lê essa cópia local sem baixar novamente.
 
 ## Estrutura de dados: `data/raw` vs `data/clean`
 
@@ -72,7 +111,7 @@ streamlit run app.py
 
 ## Passo a passo
 
-1. Substitua `notebooks/eda.ipynb` pelo seu notebook de EDA (Aula 11) e exporte o dado tratado para `data/clean/`.
+1. Preserve a entrega original da Aula 11 em `notebooks/eda.ipynb`. Use `notebooks/eda-com-downloads.ipynb` para adaptar a leitura e exportar o dado tratado para `data/clean/`.
 2. Construa o `app.py` em cima do esqueleto (sidebar, filtros, Dashboard 1 e Dashboard 2).
 3. Faça o deploy no Streamlit Community Cloud (Aula 23).
 
