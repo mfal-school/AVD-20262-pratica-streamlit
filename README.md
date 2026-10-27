@@ -8,7 +8,8 @@ O aplicativo agora usa a base da [minha EDA no Colab](https://colab.research.goo
 - **Unidade de análise:** um clube em uma temporada; 450 campanhas entre 2003 e 2024.
 - **Variáveis quantitativas:** `points`, `played`, `won`, `draw`, `loss`, `goals`, `goals_taken` e `goals_diff`.
 - **Tratamento:** mantém todos os registros e outliers, cria `saldo_resultado` (`goals_diff > 0`) e `goals_log` (`log1p(goals)`), como no notebook. A transformação logarítmica fica fora das variáveis principais do dashboard.
-- **Dashboard:** correlação de Spearman, histograma por saldo de gols e filtros por temporada, clube e valores das variáveis.
+- **Dashboard 1:** correlação de Spearman e histograma interativo em Plotly, com filtros por temporada, clube e valores das variáveis.
+- **Dashboard 2:** indicadores de desempenho, ranking clicável de clubes e evolução por temporada em Altair. O clique no ranking atualiza KPIs, evolução e tabela.
 
 O CSV tratado está em `data/clean/dataset.csv`; o app funciona sem acessar o Colab ou o Kaggle. Para reproduzir a exportação, após instalar as dependências:
 
@@ -38,6 +39,35 @@ As duas versões mantêm as 450 campanhas, conforme a decisão da EDA de preserv
 - Declaração de uso de IA: [prompts/declaracao-uso-ia.md](prompts/declaracao-uso-ia.md), a ser preenchida manualmente pelo aluno ao terminar a atividade.
 
 No Windows desta execução, `streamlit skills --yes` concluiu usando automaticamente a instalação global, pois o sistema não permitiu criar os links simbólicos locais.
+
+## Entrega da Aula 22 — parte 2
+
+O aplicativo tem duas abas: **Dashboard 1 · Exploração** e **Dashboard 2 · Desempenho**. A leitura do CSV e a matriz de Spearman usam `@st.cache_data`, com validade de cinco minutos e limite de entradas. O tema claro com destaque verde e fonte sem serifa está em `.streamlit/config.toml`.
+
+As variáveis, métricas e widgets do Dashboard 2 foram definidos antes de desenhar o rascunho e implementar a aba:
+
+- [Rascunho do Dashboard 2](entregas/rascunho-dashboard2.png).
+- [Justificativa das métricas, fórmulas e controles](entregas/justificativa-metricas.md).
+- [Validação da Parte 2](entregas/validacao-parte2.md).
+- [Dashboard 1 atualizado](entregas/dashboard1-parte2-em-execucao.png), [Dashboard 2 em execução](entregas/dashboard2-em-execucao.png) e [exemplo de seleção no ranking](entregas/dashboard2-selecao.png).
+
+**Como usar:** temporadas e clubes, na sidebar, filtram as duas abas. Os controles no bloco “Dashboard 1” afetam apenas a exploração. Na segunda aba, o toggle de 38 jogos restringe as campanhas e o slider limita as barras exibidas. Clique numa barra para selecionar um clube; use Shift + clique para incluir outros. Os KPIs, a evolução e a tabela usam a seleção. Duplo clique no ranking ou o botão de limpeza retorna ao recorte completo dos filtros. Alterar filtros comuns, o toggle de 38 jogos ou o tamanho do ranking limpa a seleção anterior.
+
+O ranking segue o [guia Altair da professora](https://github.com/mfal-school/AVD-20262-pratica-streamlit/blob/main/ALTAIR-CROSSFILTER.md), usando `on_select="rerun"`. Os indicadores são contagem de campanhas, aproveitamento dos pontos, gols por jogo e saldo por jogo. As taxas usam razões das somas, ponderadas pelos jogos dos clubes; não são médias simples dos percentuais nem totais de partidas únicas.
+
+Para executar os testes automatizados, com o venv ativo:
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+Para regenerar o rascunho:
+
+```bash
+python scripts/gerar_rascunho_dashboard2.py
+```
+
+A declaração de uso de IA permanece para preenchimento manual do aluno ao encerrar a atividade, conforme sua orientação. O notebook original da Aula 11 foi mantido intacto.
 
 Repositório utilizado para aula prática relacionada a Streamlit na disciplina Análise e Visualização de Dados da Cesar School no período de 2026.2.
 

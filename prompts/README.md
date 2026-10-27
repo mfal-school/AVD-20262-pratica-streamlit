@@ -32,8 +32,12 @@ Para regenerar os arquivos usando o CSV atual, execute da raiz:
 .venv/Scripts/python.exe scripts/gerar_rascunho.py
 ```
 
-O [prompt de quatro blocos](layout-skeleton-prompt.md) foi aplicado em 27/10/2026, junto com o rascunho, para revisar o esqueleto de `app.py`. Os comentários do código identificam os cinco blocos: cabeçalho/carregamento, sidebar, aplicação dos filtros, correlação e distribuição. Os cálculos existentes foram preservados e os filtros receberam chaves explícitas.
+O [prompt de quatro blocos](layout-skeleton-prompt.md) foi aplicado na Parte 1 em 27/10/2026, junto com o rascunho, para revisar o esqueleto de `app.py`: cabeçalho/carregamento, sidebar, aplicação dos filtros, correlação e distribuição. Os cálculos existentes foram preservados e os filtros receberam chaves explícitas. Na Parte 2, essa estrutura passou a integrar a aba de exploração.
 
 O app foi executado e seus seletores e sliders foram verificados. A [declaração de uso de IA](declaracao-uso-ia.md) será preenchida manualmente pelo aluno ao encerrar a atividade, incluindo suas decisões sobre o que aceitou, modificou ou rejeitou.
 
-Este rascunho foi criado após a primeira versão do aplicativo e orientou a revisão de 27/10/2026. A entrega desta etapa cobre o Dashboard 1 da Aula 21; o rascunho do Dashboard 2 (KPIs) permanece para a etapa correspondente.
+Este rascunho foi criado após a primeira versão do aplicativo e orientou a revisão de 27/10/2026.
+
+## Dashboard 2 — Aula 22
+
+O planejamento das variáveis, métricas e widgets está em [justificativa-metricas.md](../entregas/justificativa-metricas.md). A partir dele foi desenhado o [rascunho do Dashboard 2](../entregas/rascunho-dashboard2.png), antes de implementar a segunda aba. O código usa indicadores nativos e visuais Altair com seleção de clubes ligada aos KPIs e à evolução temporal. A declaração de uso de IA permanece para preenchimento manual pelo aluno.
