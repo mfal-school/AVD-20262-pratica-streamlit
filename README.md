@@ -71,7 +71,7 @@ A declaração de uso de IA permanece para preenchimento manual do aluno ao ence
 
 Repositório utilizado para aula prática relacionada a Streamlit na disciplina Análise e Visualização de Dados da Cesar School no período de 2026.2.
 
-Repositório-modelo das Aulas 21, 22 e 23: construção de dois dashboards em Streamlit a partir da EDA desenvolvida em sala. O deploy dos dashbords ocorrerá via Streamlit Community Cloud e serão os seguintes:
+Repositório-modelo das Aulas 21, 22 e 23: construção de dois dashboards em Streamlit a partir da EDA desenvolvida em sala. O deploy dos dashboards ocorrerá via Streamlit Community Cloud e serão os seguintes:
 
 - Dashboard 1 = correlação + distribuição das variáveis quantitativas
 - Dashboard 2 = KPIs
@@ -141,9 +141,13 @@ streamlit run app.py
 
 ## Passo a passo
 
+O passo a passo detalhado de cada aula (Aulas 21, 22 e 23), com pré-requisitos e objetivos, está em [ROTEIRO.md](ROTEIRO.md). Comece por ele depois do Setup.
+
 1. Preserve a entrega original da Aula 11 em `notebooks/eda.ipynb`. Use `notebooks/eda-com-downloads.ipynb` para adaptar a leitura e exportar o dado tratado para `data/clean/`.
 2. Construa o `app.py` em cima do esqueleto (sidebar, filtros, Dashboard 1 e Dashboard 2).
 3. Faça o deploy no Streamlit Community Cloud (Aula 23).
+
+**Link do app (Aula 23):** _(preencher após o deploy)_
 
 ## IA neste projeto
 
@@ -171,4 +175,8 @@ O uso de IA deve ser declarado conforme a seção abaixo.
 
 ## Pasta `prompts/`
 
-A pasta [prompts/](prompts/) guarda o template de prompt para transformar o rascunho de layout em esqueleto de código e a **Declaração de Uso de IA** exigida pelo Plano de Ensino. Veja [prompts/README.md](prompts/README.md).
+A pasta [prompts/](prompts/) guarda os registros de **uso de IA**: o template de prompt para transformar o rascunho de layout em esqueleto de código e a **Declaração de Uso de IA** exigida pelo Plano de Ensino. Veja [prompts/README.md](prompts/README.md).
+
+## Pasta `entregas/`
+
+A pasta [entregas/](entregas/) guarda os rascunhos de layout de cada dashboard (`.jpg` ou `.png`) e a justificativa das métricas do Dashboard 2. Veja [entregas/README.md](entregas/README.md) para o detalhe de cada arquivo e o checklist por aula. Não coloque esses arquivos no `.gitignore`.
