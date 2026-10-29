@@ -1,4 +1,4 @@
-# Dashboard 2 — justificativa das métricas
+# Justificativa das métricas — Dashboard 2
 
 Planejamento registrado em 27/10/2026, antes do rascunho e da implementação do Dashboard 2.
 
@@ -25,12 +25,45 @@ Cada linha do dataset é **uma campanha de um clube em uma temporada**, não uma
 
 Seja **S** o conjunto de campanhas após os filtros e a seleção no ranking. Todas as somas abaixo usam o mesmo conjunto S.
 
-| Métrica | Fórmula | Conceito de métrica básica | O que comunica e por que foi escolhida |
-| --- | --- | --- | --- |
-| Campanhas | Número de linhas de S | Contagem absoluta / volume | Expõe o tamanho do recorte. Evita comparar um clube com uma única participação e outro com vinte sem perceber a diferença de cobertura. Não conta jogos nem clubes distintos. |
-| Aproveitamento | `100 × Σ points / (3 × Σ played)` | Razão percentual: realizado em relação ao potencial | Resume a eficiência na conquista dos pontos possíveis. Normaliza campanhas de durações diferentes, permitindo comparação mais informativa que o total bruto de pontos. |
-| Gols por jogo | `Σ goals / Σ played` | Taxa por unidade de exposição | Mostra a produção ofensiva média de cada participação de clube em um jogo. Um valor de 1,50 significa 1,5 gol marcado pelo clube por jogo, não 1,5 gol total da partida. |
-| Saldo por jogo | `Σ goals_diff / Σ played` | Saldo (diferença) normalizado por exposição | Resume o balanço entre ataque e defesa. Positivo indica superávit de gols e negativo indica déficit. Complementa os gols marcados, que isoladamente não mostram os gols sofridos. |
+### Métrica 1: Campanhas
+
+- **Variável:** registros identificados por `team` (clube) e `season` (temporada). Cada linha representa uma campanha.
+- **O que mede:** o número de campanhas presentes no recorte selecionado; não conta partidas nem clubes distintos.
+- **Fórmula e conceito:** número de linhas de S — contagem absoluta, que informa o volume de observações.
+- **Por que foi escolhida:** permite avaliar a cobertura da comparação. Um indicador calculado sobre uma campanha tem um contexto diferente de outro calculado sobre vinte.
+- **Público-alvo:** pessoas que acompanham o Brasileirão e comparam clubes ou períodos.
+- **Qual decisão pode ser apoiada:** ampliar o período selecionado ou conferir a quantidade de campanhas antes de comparar os demais indicadores.
+- **O que comunica ao público-alvo:** quantas participações de clubes em temporadas sustentam os números exibidos. Por exemplo, “20 campanhas” significa vinte registros de clube e temporada no recorte.
+
+### Métrica 2: Aproveitamento
+
+- **Variável:** `points` (pontos oficiais) e `played` (jogos disputados pelo clube).
+- **O que mede:** a porcentagem dos pontos possíveis conquistada pelos clubes nas campanhas selecionadas.
+- **Fórmula e conceito:** `100 × Σ points / (3 × Σ played)` — razão percentual entre o resultado realizado e o potencial de pontos.
+- **Por que foi escolhida:** permite comparar campanhas de durações diferentes sem depender apenas do total bruto de pontos.
+- **Público-alvo:** torcedores e leitores interessados na eficiência dos clubes na conquista de pontos.
+- **Qual decisão pode ser apoiada:** identificar clubes ou temporadas com maior aproveitamento para comparar sua trajetória no gráfico de evolução.
+- **O que comunica ao público-alvo:** quanto do total de pontos disponíveis foi obtido. Um aproveitamento de 60% significa conquistar 60 de cada 100 pontos possíveis; não significa vencer 60% das partidas.
+
+### Métrica 3: Gols por jogo
+
+- **Variável:** `goals` (gols marcados) e `played` (jogos disputados pelo clube).
+- **O que mede:** a quantidade média de gols marcados por participação de clube em um jogo, dentro do recorte selecionado.
+- **Fórmula e conceito:** `Σ goals / Σ played` — taxa por unidade de exposição, ponderada pela quantidade de jogos.
+- **Por que foi escolhida:** resume a produção ofensiva sem favorecer uma campanha apenas porque ela teve mais jogos.
+- **Público-alvo:** pessoas que desejam comparar a produção ofensiva de clubes e temporadas.
+- **Qual decisão pode ser apoiada:** escolher clubes ou períodos para investigar diferenças na produção ofensiva e relacioná-las ao aproveitamento.
+- **O que comunica ao público-alvo:** quantos gols o clube marcou, em média, por jogo. Um valor de 1,50 indica 1,5 gol marcado pelo clube por jogo; não representa o total de gols dos dois adversários na partida.
+
+### Métrica 4: Saldo por jogo
+
+- **Variável:** `goals_diff` (saldo de gols registrado na base) e `played` (jogos disputados pelo clube). `goals_taken` (gols sofridos) auxilia a interpretação do saldo.
+- **O que mede:** o saldo médio de gols por participação de clube em um jogo, considerando as campanhas selecionadas.
+- **Fórmula e conceito:** `Σ goals_diff / Σ played` — saldo normalizado pela quantidade de jogos, combinando diferença e taxa.
+- **Por que foi escolhida:** complementa os gols por jogo ao considerar o balanço entre gols marcados e sofridos. Marcar muitos gols, isoladamente, não informa quanto o clube sofreu.
+- **Público-alvo:** pessoas que desejam entender o equilíbrio entre ataque e defesa dos clubes.
+- **Qual decisão pode ser apoiada:** identificar clubes ou períodos com saldo positivo ou negativo e aprofundar a comparação dos seus resultados.
+- **O que comunica ao público-alvo:** se o clube marcou mais ou menos gols do que sofreu, em média. Um saldo de +0,50 por jogo indica meio gol a mais marcado do que sofrido por jogo; um valor negativo indica o inverso. Ao reunir todos os clubes, o saldo tende a se aproximar de zero, por isso a seleção de clubes é importante para interpretá-lo.
 
 Os indicadores são descritivos. Não foram inventadas metas ou faixas de desempenho para classificá-los como bons ou ruins. A conexão com a teoria usa os conceitos de contagem, razão, taxa, saldo e agregação ponderada; o material específico da aula não estava anexado ao enunciado.
 

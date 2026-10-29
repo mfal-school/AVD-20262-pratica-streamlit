@@ -10,17 +10,19 @@ Artefatos de entrega que não são sobre uso de IA (isso fica em [`prompts/`](..
 
 ## Checklist — Aula 21
 
-- [ ] `rascunho-dashboard1.jpg`/`.png`
+- [x] [rascunho-dashboard1.png](rascunho-dashboard1.png)
 
 ## Checklist — Aula 22
 
-- [ ] `rascunho-dashboard2.jpg`/`.png`
-- [ ] `justificativa-metricas.md` preenchido (não só criado vazio)
+- [x] [rascunho-dashboard2.png](rascunho-dashboard2.png)
+- [x] [justificativa-metricas.md](justificativa-metricas.md) preenchido (não só criado vazio)
 
 ## Checklist — entrega final (Aula 23)
 
-- [ ] Os dois rascunhos
-- [ ] `justificativa-metricas.md` completo
+- [x] Os dois rascunhos: [Dashboard 1](rascunho-dashboard1.png) e [Dashboard 2](rascunho-dashboard2.png)
+- [x] [justificativa-metricas.md](justificativa-metricas.md) completo
+
+Estes itens confirmam os arquivos desta pasta. O rascunho do Dashboard 1 foi criado após a primeira versão do app e orientou sua revisão, conforme o [registro do projeto](../prompts/README.md); o do Dashboard 2 precedeu sua implementação. O deploy da Aula 23 é uma etapa separada.
 
 ## Modelo de `justificativa-metricas.md`
 
